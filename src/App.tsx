@@ -10,12 +10,12 @@ interface Message {
 }
 
 // OIDC 설정
-const oidcConfig = {
-    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_GiMEcaGt4",
-    client_id: "4i5aodon6970pe8e51n9ptokde",
-    redirect_uri: "https://main.d1iozj3igvpaxt.amplifyapp.com",
+const cognitoAuthConfig = {
+    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_uJNRL70cN",
+    client_id: "4vn8p9ll3da0qq7k96lk67sapf",
+    redirect_uri: "https://main.d1ysbm4jnf6x6r.amplifyapp.com",
     response_type: "code",
-    scope: "openid email profile",
+    scope: "email openid phone",
 };
 
 const App: React.FC = () => {
