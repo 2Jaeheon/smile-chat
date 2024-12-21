@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import {useAuth} from 'react-oidc-context'; // Cognito 인증을 위한 useAuth 훅을 가져옴
+import React, {useState, useEffect, useContext} from 'react';
 import MessageList from './components/MessageList';
 import {getMessages} from './api/api';
+import {AuthProvider, AuthContext, AuthContextProps} from 'react-oidc-context';
 
 interface Message {
     messageId: string;
@@ -9,24 +9,42 @@ interface Message {
     timestamp: string;
 }
 
+// OIDC 설정
+const oidcConfig = {
+    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_GiMEcaGt4",
+    client_id: "4i5aodon6970pe8e51n9ptokde",
+    redirect_uri: "https://main.d1iozj3igvpaxt.amplifyapp.com",
+    response_type: "code",
+    scope: "openid email profile",
+};
+
 const App: React.FC = () => {
-    const {isAuthenticated, user, signinRedirect, signoutRedirect, isLoading, error} = useAuth(); // 인증 관련 메서드 사용
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState<string>(''); // 입력한 새로운 메시지 상태
 
-    // 메시지 풀링: 15초마다 API 호출
+    // `AuthContext` 가져오기
+    const auth = useContext(AuthContext) as AuthContextProps;
+
+    // 로그인 상태 확인
+    const {user, isAuthenticated, isLoading} = auth;
+
+    // 메시지 풀링: 로그인된 경우만 실행
     useEffect(() => {
-        if (isAuthenticated) {
-            const fetchMessages = async () => {
-                const data = await getMessages();
-                setMessages(data);
-            };
+        if (!isAuthenticated) return;
 
-            fetchMessages();
+        const fetchMessages = async () => {
+            const data = await getMessages();
+            setMessages(data);
+        };
 
-            const interval = setInterval(fetchMessages, 15000);
-            return () => clearInterval(interval); // 컴포넌트 언마운트 시 interval 정리
-        }
+        // 첫 번째 로딩
+        fetchMessages();
+
+        // 60초마다 메시지를 가져옵니다.
+        const interval = setInterval(fetchMessages, 60000);
+
+        // 컴포넌트 언마운트 시 interval 정리
+        return () => clearInterval(interval);
     }, [isAuthenticated]);
 
     // 메시지 전송 함수
@@ -38,51 +56,48 @@ const App: React.FC = () => {
                 timestamp: new Date().toISOString(),
             };
 
+            // 새로운 메시지를 리스트에 추가 (API 호출을 통해 실제 서버에 메시지를 전송할 수 있음)
             setMessages((prevMessages) => [...prevMessages, newMsg]);
-            setNewMessage(''); // 메시지 전송 후 입력창 비우기
+
+            // 메시지 전송 후 입력창 비우기
+            setNewMessage('');
         }
     };
 
-    // 로그인 상태가 로딩 중일 경우
+    // 로딩 상태 처리
     if (isLoading) {
         return <div>Loading...</div>;
     }
 
-    // 인증 오류 처리
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    // 로그인되지 않은 경우
+    if (!isAuthenticated) {
+        return <div>Please log in to view messages.</div>;
     }
 
     // 로그인된 경우
-    if (isAuthenticated) {
-        return (
-            <div className="App">
-                <h1>Welcome, {user?.profile?.email}</h1> {/* 로그인된 사용자 이메일 표시 */}
-                <MessageList messages={messages}/>
-
-                <div>
-          <textarea
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Enter your message..."
-          />
-                    <button onClick={handleSendMessage}>Send Message</button>
-                </div>
-
-                <button onClick={() => signoutRedirect()}>Log out</button>
-                {/* 로그아웃 처리 */}
-            </div>
-        );
-    }
-
-    // 로그인되지 않은 경우
     return (
         <div className="App">
             <h1>Real-time Chat</h1>
-            <button onClick={() => signinRedirect()}>Log in</button>
-            {/* 로그인 처리 */}
+            <p>Welcome, {user?.profile.name || 'User'}!</p>
+            <MessageList messages={messages}/>
+
+            <div>
+                <textarea
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)} // 메시지 입력시 상태 업데이트
+                    placeholder="Enter your message..."
+                />
+                <button onClick={handleSendMessage}>Send Message</button>
+            </div>
         </div>
     );
 };
 
-export default App;
+// Wrap the App with AuthProvider for OIDC
+const RootApp: React.FC = () => (
+    <AuthProvider {...oidcConfig}>
+        <App/>
+    </AuthProvider>
+);
+
+export default RootApp;
