@@ -18,6 +18,7 @@ const cognitoAuthConfig = {
     scope: "email openid phone",
 };
 
+
 const App: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState<string>(''); // 입력한 새로운 메시지 상태
@@ -95,7 +96,7 @@ const App: React.FC = () => {
 
 // Wrap the App with AuthProvider for OIDC
 const RootApp: React.FC = () => (
-    <AuthProvider {...oidcConfig}>
+    <AuthProvider {...cognitoAuthConfig}>
         <App/>
     </AuthProvider>
 );
