@@ -1,3 +1,56 @@
+import React, {useContext} from "react";
+import {AuthProvider, AuthContext, AuthContextProps} from "react-oidc-context";
+
+// OIDC 설정
+const cognitoAuthConfig = {
+    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_uJNRL70cN",
+    client_id: "4vn8p9ll3da0qq7k96lk67sapf",
+    redirect_uri: "https://main.d1ysbm4jnf6x6r.amplifyapp.com",
+    response_type: "code",
+    scope: "phone openid email",
+};
+
+
+const App: React.FC = () => {
+    const {user, isAuthenticated, isLoading, signinRedirect} = useContext(AuthContext) as AuthContextProps;
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    return (
+        <div className="App">
+            <h1>Welcome to the App</h1>
+
+            <div>
+                <h2>User Information</h2>
+                {user ? (
+                    <div>
+                        <p><strong>Name:</strong> {user.profile.name || "No Name Available"}</p>
+                        <p><strong>Email:</strong> {user.profile.email || "No Email Available"}</p>
+                    </div>
+                ) : (
+                    <p>No user information available.</p>
+                )}
+            </div>
+
+            {!isAuthenticated && (
+                <button onClick={() => signinRedirect()}>Log In</button>
+            )}
+        </div>
+    );
+};
+
+// Wrap the App with AuthProvider for OIDC
+const RootApp: React.FC = () => (
+    <AuthProvider {...cognitoAuthConfig}>
+        <App/>
+    </AuthProvider>
+);
+
+export default RootApp;
+
+/*
 import React, {useState, useEffect, useContext} from 'react';
 import MessageList from './components/MessageList';
 import {getMessages} from './api/api';
@@ -101,4 +154,4 @@ const RootApp: React.FC = () => (
     </AuthProvider>
 );
 
-export default RootApp;
+export default RootApp;*/
