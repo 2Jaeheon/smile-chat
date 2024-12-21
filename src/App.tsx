@@ -1,54 +1,49 @@
-import React, {useContext} from "react";
-import {AuthProvider, AuthContext, AuthContextProps} from "react-oidc-context";
+import React from "react";
+import {useAuth} from "react-oidc-context";
 
-// OIDC 설정
-const cognitoAuthConfig = {
-    authority: "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_uJNRL70cN",
-    client_id: "4vn8p9ll3da0qq7k96lk67sapf",
-    redirect_uri: "https://main.d1ysbm4jnf6x6r.amplifyapp.com",
-    response_type: "code",
-    scope: "phone openid email",
-};
+function App() {
+    const auth = useAuth();
 
+    const signOutRedirect = () => {
+        const clientId = "4vn8p9ll3da0qq7k96lk67sapf";
+        const logoutUri = "http://localhost:3000"; // 로그아웃 후 리다이렉트될 URI
+        const cognitoDomain = "https://us-east-1ujnrl70cn.auth.us-east-1.amazoncognito.com";
+        window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
+    };
 
-const App: React.FC = () => {
-    const {user, isAuthenticated, isLoading, signinRedirect} = useContext(AuthContext) as AuthContextProps;
-
-    if (isLoading) {
+    if (auth.isLoading) {
         return <div>Loading...</div>;
     }
 
-    return (
-        <div className="App">
-            <h1>Welcome to the App</h1>
+    if (auth.error) {
+        return <div>Encountering error... {auth.error.message}</div>;
+    }
 
+    if (auth.isAuthenticated) {
+        return (
             <div>
-                <h2>User Information</h2>
-                {user ? (
-                    <div>
-                        <p><strong>Name:</strong> {user.profile.name || "No Name Available"}</p>
-                        <p><strong>Email:</strong> {user.profile.email || "No Email Available"}</p>
-                    </div>
-                ) : (
-                    <p>No user information available.</p>
-                )}
-            </div>
+                <h1>Welcome!</h1>
+                <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
+                <pre>Name: {auth.user?.profile.name || "No Name Available"}</pre>
+                <pre>ID Token: {auth.user?.id_token}</pre>
+                <pre>Access Token: {auth.user?.access_token}</pre>
+                <pre>Refresh Token: {auth.user?.refresh_token}</pre>
 
-            {!isAuthenticated && (
-                <button onClick={() => signinRedirect()}>Log In</button>
-            )}
+                <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
+                <button onClick={() => signOutRedirect()}>Sign out (Redirect)</button>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <h1>Login Required</h1>
+            <button onClick={() => auth.signinRedirect()}>Sign in</button>
         </div>
     );
-};
+}
 
-// Wrap the App with AuthProvider for OIDC
-const RootApp: React.FC = () => (
-    <AuthProvider {...cognitoAuthConfig}>
-        <App/>
-    </AuthProvider>
-);
-
-export default RootApp;
+export default App;
 
 /*
 import React, {useState, useEffect, useContext} from 'react';
