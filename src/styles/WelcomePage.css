@@ -1,32 +1,29 @@
 /* WelcomePage.css */
 
-/* 기본 body 스타일 */
 body {
     margin: 0;
     font-family: "Arial", sans-serif;
     color: #333;
-    background-color: #e8f5e9;
+    background-color: #e8f5e9; /* 배경색 추가 */
 }
 
-/* WelcomePage의 컨테이너 스타일 */
 .welcome-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px; /* 작은 화면에서 여백 추가 */
-    box-sizing: border-box; /* padding 포함한 크기 계산 */
+    padding: 20px; /* 모바일에서 여백 추가 */
+    box-sizing: border-box;
 }
 
-/* WelcomePage 내용 스타일 */
 .welcome-content {
     text-align: center;
     background: #fff;
-    padding: 40px; /* 적당한 패딩 */
+    padding: 120px;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    width: 100%; /* 최대 너비 400px, 그 이상일 경우 화면에 맞게 100% */
+    width: 100%; /* 모바일에서 100% 너비 */
 }
 
 /* 제목 스타일 */
@@ -64,36 +61,40 @@ p {
     box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
 }
 
-/* 모바일 화면 최적화 */
+/* 모바일 환경에서 반응형 처리 */
 @media (max-width: 768px) {
     .welcome-container {
-        height: auto;
-        padding: 10px; /* 모바일 화면에서 여백을 줄임 */
+        height: auto; /* 모바일에서 높이 자동 조정 */
+        padding: 10px; /* 여백 줄이기 */
     }
 
     .welcome-content {
-        padding: 30px; /* 모바일에서 패딩을 줄여줌 */
-        max-width: 100%; /* 모바일 화면에 맞게 100%로 설정 */
+        padding: 40px; /* 패딩 줄이기 */
+        max-width: 100%; /* 너비를 100%로 설정 */
     }
 
     h1 {
-        font-size: 2rem; /* 제목 글씨 크기 줄이기 */
+        font-size: 2rem; /* 폰트 크기 줄이기 */
     }
 
     p {
-        font-size: 0.9rem; /* 본문 글씨 크기 줄이기 */
+        font-size: 0.9rem; /* 폰트 크기 줄이기 */
     }
 
     .welcome-button {
-        font-size: 1rem; /* 버튼 크기 조정 */
+        font-size: 1rem; /* 버튼 크기 줄이기 */
         padding: 10px 20px; /* 버튼 패딩 줄이기 */
     }
 }
 
 /* 더 작은 화면을 위한 추가 최적화 */
 @media (max-width: 480px) {
+    .welcome-container {
+        padding: 5px; /* 여백 더 줄이기 */
+    }
+
     .welcome-content {
-        padding: 20px; /* 더 작은 화면에서 패딩 줄이기 */
+        padding: 20px; /* 패딩 더 줄이기 */
     }
 
     h1 {
@@ -105,7 +106,7 @@ p {
     }
 
     .welcome-button {
-        font-size: 0.9rem; /* 버튼 크기 줄이기 */
-        padding: 8px 16px; /* 버튼 패딩 줄이기 */
+        font-size: 0.9rem; /* 버튼 크기 더 줄이기 */
+        padding: 8px 16px; /* 버튼 패딩 더 줄이기 */
     }
 }
