@@ -4,7 +4,7 @@ import '../styles/MessageInput.css';  // 스타일 파일을 불러옵니다.
 interface MessageInputProps {
     newMessage: string;
     setNewMessage: React.Dispatch<React.SetStateAction<string>>;
-    handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 메시지와 이미지 URL을 함께 전송
+    handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 객체 형태로 메시지와 이미지 URL 전달
     uploadImage: (file: string, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
     setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;  // 이미지 URL을 상태로 설정
 }
@@ -25,6 +25,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
             setWarning('메시지는 100자 이하로 작성해주세요.');
             return; // 100자 초과하면 전송되지 않도록 처리
         }
+
+        // 메시지와 이미지 URL을 함께 전송
         handleSendMessage({text: newMessage, imageUrl: imageFile ? URL.createObjectURL(imageFile) : undefined});
         setNewMessage("");  // 입력창 초기화
         setWarning('');  // 경고 메시지 초기화
