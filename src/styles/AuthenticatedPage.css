@@ -6,8 +6,8 @@
     color: #333;
 }
 
-html, body {
-    overflow: hidden; /* 오버플로우 방지 */
+body {
+    background-color: #f4f4f9; /* 부드러운 배경 */
 }
 
 
@@ -56,35 +56,4 @@ html, body {
     font-size: 1.8rem;
     color: #2ecc71; /* 초록색 포인트 */
     /*margin-bottom: 15px;*/
-}
-
-/* 미디어 쿼리 */
-@media (max-width: 768px) {
-    .header h1 {
-        font-size: 1.8rem;
-    }
-
-    .signout-button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-    }
-
-    .chat-section {
-        padding: 10px;
-    }
-
-    .message-input-container {
-        padding: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header h1 {
-        font-size: 1.5rem;
-    }
-
-    .chat-section {
-        padding: 5px;
-        max-height: calc(100vh - 150px);
-    }
 }
