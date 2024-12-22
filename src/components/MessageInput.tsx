@@ -4,7 +4,7 @@ import '../styles/MessageInput.css';  // 스타일 파일을 불러옵니다.
 interface MessageInputProps {
     newMessage: string;
     setNewMessage: React.Dispatch<React.SetStateAction<string>>;
-    handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 객체 형태로 메시지와 이미지 URL 전달
+    handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 메시지와 이미지 URL을 함께 전송
     uploadImage: (file: string, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
     setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;  // 이미지 URL을 상태로 설정
 }
@@ -18,18 +18,35 @@ const MessageInput: React.FC<MessageInputProps> = ({
                                                    }) => {
     const [warning, setWarning] = useState<string>('');
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const [isUploading, setIsUploading] = useState<boolean>(false);  // 업로드 중 상태 관리
 
-    const handleClick = () => {
+    const handleClick = async () => {
         // 메시지 전송 후 입력창 초기화
         if (newMessage.length > 100) {
             setWarning('메시지는 100자 이하로 작성해주세요.');
             return; // 100자 초과하면 전송되지 않도록 처리
         }
 
-        // 메시지와 이미지 URL을 함께 전송
-        handleSendMessage({text: newMessage, imageUrl: imageFile ? URL.createObjectURL(imageFile) : undefined});
+        setIsUploading(true); // 업로드 시작
+
+        let imageUrl;
+        if (imageFile) {
+            try {
+                // 이미지 업로드
+                const result = await uploadImage(URL.createObjectURL(imageFile), imageFile.name, imageFile.type);
+                imageUrl = result.imageUrl;  // 업로드된 이미지 URL
+                setImageUrl(imageUrl); // 이미지 URL 상태에 저장
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            }
+        }
+
+        // 메시지 전송
+        handleSendMessage({text: newMessage, imageUrl});
+
         setNewMessage("");  // 입력창 초기화
         setWarning('');  // 경고 메시지 초기화
+        setIsUploading(false);  // 업로드 완료
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +79,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     placeholder="Type your message... (Max 100 characters)"
                     maxLength={100}  // 최대 100자까지 입력 제한
                 />
-                <button onClick={handleClick} disabled={newMessage.length > 100}>Send</button>
+                <button onClick={handleClick} disabled={newMessage.length > 100 || isUploading}>
+                    {isUploading ? 'Uploading...' : 'Send'}
+                </button>
 
                 {/* Picture 버튼 */}
                 <input
