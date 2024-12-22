@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
-import {getMessages, addMessage} from "./api/api";  // addMessage 함수 추가
+import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌트 추가
+import {getMessages} from "./api/api"; // addMessage를 여기서 호출하지 않음
 
 interface Message {
     messageId: string;
@@ -38,7 +39,7 @@ const App: React.FC = () => {
     }, [auth.isAuthenticated]);
 
     // 메시지 전송 함수
-    const handleSendMessage = async () => {
+    const handleSendMessage = async (newMessage: string) => {
         const emailPrefix = auth.user?.profile.email?.split('@')[0];  // 이메일에서 @ 앞부분만 추출
 
         if (newMessage.trim() !== "") {
@@ -51,12 +52,25 @@ const App: React.FC = () => {
             };
 
             try {
-                await addMessage(newMsg);  // addMessage 함수 호출하여 메시지 추가
-                setNewMessage("");  // 메시지 전송 후 입력창 비우기
-
                 // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
-                const updatedMessages = await getMessages();
-                setMessages(updatedMessages);  // 메시지 갱신
+                const response = await fetch('https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI/messages', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-api-key': process.env.REACT_APP_API_KEY || '', // API 키 헤더에 포함
+                    },
+                    body: JSON.stringify(newMsg),
+                });
+
+                if (response.ok) {
+                    setNewMessage("");  // 메시지 전송 후 입력창 비우기
+
+                    // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
+                    const updatedMessages = await getMessages();
+                    setMessages(updatedMessages);  // 메시지 갱신
+                } else {
+                    console.error('Error adding message:', await response.text());
+                }
             } catch (error) {
                 console.error("Error adding message:", error);
             }
@@ -76,26 +90,18 @@ const App: React.FC = () => {
             <div>
                 <h1>Welcome!</h1>
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
-                <pre>ID Token: {auth.user?.id_token}</pre>
-
-                <pre>Access Token: {auth.user?.access_token}</pre>
-                <pre>Refresh Token: {auth.user?.refresh_token}</pre>
-
-                <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
-                <button onClick={signOutRedirect}>Sign out (Redirect)</button>
 
                 <div className="Chat">
                     <h2>Real-time Chat</h2>
                     <MessageList messages={messages}/>
-                    <div>
-                        <textarea
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            placeholder="Enter your message..."
-                        />
-                        <button onClick={handleSendMessage}>Send Message</button>
-                    </div>
                 </div>
+
+                {/* 메시지 입력 컴포넌트 호출 */}
+                <MessageInput
+                    newMessage={newMessage}
+                    setNewMessage={setNewMessage}
+                    handleSendMessage={handleSendMessage}
+                />
             </div>
         );
     }
