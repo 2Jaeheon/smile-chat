@@ -1,11 +1,9 @@
-/*
-!* AuthenticatedPage.css *!
-
 .authenticated-container {
     font-family: "Arial", sans-serif;
     padding: 20px;
-    background-color: #f4f4f9; !* 부드러운 배경 *!
+    background-color: #f4f4f9; /* 부드러운 배경 */
     color: #333;
+    z-index: 0;
 }
 
 .header {
@@ -20,7 +18,7 @@
 }
 
 .header h1 span {
-    color: #2ecc71; !* 초록색 포인트 *!
+    color: #2ecc71; /* 초록색 포인트 */
 }
 
 .user-info {
@@ -30,7 +28,7 @@
 }
 
 .signout-button {
-    background: #2ecc71; !* 초록색 버튼 *!
+    background: #2ecc71; /* 초록색 버튼 */
     color: white;
     font-size: 1rem;
     padding: 10px 20px;
@@ -51,6 +49,6 @@
 
 .chat-section h2 {
     font-size: 1.8rem;
-    color: #2ecc71; !* 초록색 포인트 *!
+    color: #2ecc71; /* 초록색 포인트 */
     margin-bottom: 15px;
-}*/
+}
