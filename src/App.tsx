@@ -100,10 +100,8 @@ const App: React.FC = () => {
                         <button className="signout-button" onClick={() => signOutRedirect()}>
                             Sign Out
                         </button>
-                        gi
                     </div>
                     <div className="chat-section">
-                        <h2>Real-time Chat</h2>
                         <MessageList messages={messages}/>
 
                         <MessageInput
