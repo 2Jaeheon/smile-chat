@@ -86,8 +86,6 @@ const App: React.FC = () => {
     if (auth.isAuthenticated) {
         return (
             <div>
-
-
                 <h1>Welcome!</h1>
 
                 <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
