@@ -4,5 +4,7 @@
     gap: 10px; /* 메시지 간 간격 */
     max-height: calc(6 * 100px); /* 메시지 카드 높이(예: 80px) × 6 */
     overflow-y: auto; /* 스크롤 가능 */
-    padding: 200px;
+    padding: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
