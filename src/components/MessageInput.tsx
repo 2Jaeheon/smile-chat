@@ -102,13 +102,14 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     Select Image
                 </label>
 
-                {/* 선택된 파일 이름을 UI에 표시 */}
-                {imageFile && (
-                    <p>{imageFile.name}</p>  // 선택된 파일 이름 표시
-                )}
-                {!imageFile && (
-                    <p>No file selected</p>  // 파일이 선택되지 않았으면 안내 문구 표시
-                )}
+                {/* 파일 선택 후 파일 이름을 표시 */}
+                <div className="file-info">
+                    {imageFile ? (
+                        <p>Selected File: {imageFile.name}</p>
+                    ) : (
+                        <p>No file selected</p>
+                    )}
+                </div>
             </div>
         </div>
     );
