@@ -64,23 +64,21 @@ const UPLOAD_API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/M
 
 
 // POST 요청: 이미지 업로드
-export const uploadImage = async (file: string, fileName: string, fileType: string): Promise<any> => {
+export const uploadImage = async (file: File, fileName: string, fileType: string): Promise<any> => {
     try {
-        // 전송할 데이터 준비
-        const requestBody = {
-            file,
-            fileName,
-            fileType,
-        };
+        // FormData 객체를 사용하여 파일을 전송
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('fileName', fileName);
+        formData.append('fileType', fileType);
 
         // API에 POST 요청 보내기
         const response = await fetch(UPLOAD_API_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 'x-api-key': process.env.REACT_APP_API_KEY || '', // API 키 헤더에 포함
             },
-            body: JSON.stringify(requestBody), // Base64로 인코딩된 파일과 메타데이터를 전달
+            body: formData,  // FormData로 파일을 전송
         });
 
         if (!response.ok) {

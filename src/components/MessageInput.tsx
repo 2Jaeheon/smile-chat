@@ -5,7 +5,7 @@ interface MessageInputProps {
     newMessage: string;
     setNewMessage: React.Dispatch<React.SetStateAction<string>>;
     handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 메시지와 이미지 URL을 함께 전송
-    uploadImage: (file: string, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
+    uploadImage: (file: File, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
     setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;  // 이미지 URL을 상태로 설정
 }
 
@@ -33,7 +33,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         if (imageFile) {
             try {
                 // 이미지 업로드
-                const result = await uploadImage(URL.createObjectURL(imageFile), imageFile.name, imageFile.type);
+                const result = await uploadImage(imageFile, imageFile.name, imageFile.type);
                 imageUrl = result.imageUrl;  // 업로드된 이미지 URL
                 setImageUrl(imageUrl); // 이미지 URL 상태에 저장
             } catch (error) {
