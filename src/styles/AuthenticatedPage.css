@@ -48,6 +48,7 @@ body {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 200px;
+    margin-bottom: 20px;
 }
 
 .signout-button:hover {
