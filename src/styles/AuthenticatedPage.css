@@ -2,7 +2,7 @@
 .authenticated-container {
     font-family: "Arial", sans-serif;
     max-width: 100%;
-    padding: 20px;
+    padding: 10px;
     background-color: #f4f4f9; /* 부드러운 배경 */
     color: #333;
     box-sizing: border-box; /* 패딩을 포함하여 크기를 계산 */
