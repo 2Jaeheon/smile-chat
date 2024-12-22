@@ -7,6 +7,7 @@ interface Message {
     content: string;
     timestamp: string;
     sentiment: string;
+    imageUrl?: string;  // 메시지와 함께 이미지 URL도 포함
 }
 
 interface MessageListProps {

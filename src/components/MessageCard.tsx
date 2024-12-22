@@ -6,6 +6,7 @@ interface Message {
     content: string;
     timestamp: string;
     sentiment: string;  // 감정 상태 추가 (NEGATIVE, POSITIVE, NEUTRAL)
+    imageUrl?: string;  // 이미지 URL 추가
 }
 
 interface MessageCardProps {
@@ -40,6 +41,13 @@ const MessageCard: React.FC<MessageCardProps> = ({message}) => {
 
             {/* 감정에 맞는 이모티콘 표시 */}
             <div className="emoji">{getEmoji(message.sentiment)}</div>
+
+            {/* 이미지가 있는 경우 이미지를 표시 */}
+            {message.imageUrl && (
+                <div className="message-image">
+                    <img src={message.imageUrl} alt="Message attachment"/>
+                </div>
+            )}
         </div>
     );
 };
