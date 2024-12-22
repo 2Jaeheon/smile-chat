@@ -91,7 +91,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 </button>
             </div>
 
-            {/* 파일 선택 부분 (절대 위치로 위치 지정) */}
+            {/* 파일 선택 부분 (입력창 바로 아래 고정) */}
             <div className="file-input-container">
                 <input
                     type="file"
