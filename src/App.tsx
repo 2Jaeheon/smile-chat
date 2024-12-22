@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
-import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌트 추가
-import {getMessages, uploadImage} from "./api/api"; // uploadImage 함수 추가
-import LoadingSpinner from "./components/LoadingSpinner"; // 로딩 스피너 추가
-import "./styles/WelcomePage.css"; // WelcomePage 스타일 추가
+import MessageInput from "./components/MessageInput";  // MessageInput 컴포넌트 추가
+import {getMessages, uploadImage} from "./api/api";  // uploadImage 함수 추가
+import LoadingSpinner from "./components/LoadingSpinner";  // 로딩 스피너 추가
+import "./styles/WelcomePage.css";  // WelcomePage 스타일 추가
 import "./styles/AuthenticatedPage.css";
 
 interface Message {
@@ -12,12 +12,14 @@ interface Message {
     content: string;
     timestamp: string;
     sentiment: string;
+    imageUrl?: string;  // 메시지와 함께 이미지 URL도 포함
 }
 
 const App: React.FC = () => {
     const auth = useAuth();
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState<string>("");
+    const [imageUrl, setImageUrl] = useState<string | undefined>(undefined); // 이미지 URL 상태 추가
 
     // 로그아웃 리다이렉트 함수
     const signOutRedirect = () => {
@@ -42,17 +44,18 @@ const App: React.FC = () => {
         }
     }, [auth.isAuthenticated]);
 
-    // 메시지 전송 함수
-    const handleSendMessage = async (newMessage: string) => {
+    const handleSendMessage = async (message: { text: string, imageUrl?: string }) => {
+        const {text, imageUrl} = message;
         const emailPrefix = auth.user?.profile.email?.split('@')[0];  // 이메일에서 @ 앞부분만 추출
 
-        if (newMessage.trim() !== "") {
+        if (text.trim() !== "") {
             const newMsg = {
                 messageId: emailPrefix || `${Date.now()}`,  // 이메일이 없을 경우 타임스탬프 사용
                 timestamp: Math.floor(Date.now() / 1000), // 초 단위 유닉스 타임스탬프
-                content: newMessage,
+                content: text,
                 sentiment: "", // 예시 sentiment
                 userId: auth.user?.profile.email || "unknown", // 사용자 ID를 이메일로 사용
+                imageUrl,  // 이미지 URL 추가
             };
 
             try {
@@ -70,7 +73,6 @@ const App: React.FC = () => {
                     // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
                     const updatedMessages = await getMessages();
                     setMessages(updatedMessages);  // 메시지 갱신
-
                 } else {
                     console.error('Error adding message:', await response.text());
                 }
@@ -111,6 +113,7 @@ const App: React.FC = () => {
                             setNewMessage={setNewMessage}
                             handleSendMessage={handleSendMessage}
                             uploadImage={uploadImage}  // uploadImage 함수를 MessageInput에 전달
+                            setImageUrl={setImageUrl}  // 이미지 URL 상태를 업데이트할 수 있도록 전달
                         />
                     </div>
                 </div>

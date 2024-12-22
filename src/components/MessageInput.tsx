@@ -6,12 +6,18 @@ interface MessageInputProps {
     setNewMessage: React.Dispatch<React.SetStateAction<string>>;
     handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 메시지와 이미지 URL을 함께 전송
     uploadImage: (file: string, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
+    setImageUrl: React.Dispatch<React.SetStateAction<string | undefined>>;  // 이미지 URL을 상태로 설정
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, handleSendMessage, uploadImage}) => {
+const MessageInput: React.FC<MessageInputProps> = ({
+                                                       newMessage,
+                                                       setNewMessage,
+                                                       handleSendMessage,
+                                                       uploadImage,
+                                                       setImageUrl
+                                                   }) => {
     const [warning, setWarning] = useState<string>('');
     const [imageFile, setImageFile] = useState<File | null>(null);
-    const [imageUrl, setImageUrl] = useState<string | undefined>(undefined); // 타입을 string | undefined로 수정
 
     const handleClick = () => {
         // 메시지 전송 후 입력창 초기화
@@ -19,13 +25,9 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
             setWarning('메시지는 100자 이하로 작성해주세요.');
             return; // 100자 초과하면 전송되지 않도록 처리
         }
-
-        // 메시지와 이미지 URL을 함께 전송
-        handleSendMessage({text: newMessage, imageUrl});
-
+        handleSendMessage({text: newMessage, imageUrl: imageFile ? URL.createObjectURL(imageFile) : undefined});
         setNewMessage("");  // 입력창 초기화
         setWarning('');  // 경고 메시지 초기화
-        setImageUrl(undefined); // 이미지 URL 초기화
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,26 +48,6 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
         }
     };
 
-    const handlePictureUpload = async () => {
-        if (imageFile) {
-            const fileReader = new FileReader();
-            fileReader.onloadend = async () => {
-                const base64File = fileReader.result as string;
-                const fileName = imageFile.name;
-                const fileType = imageFile.type;
-
-                try {
-                    const result = await uploadImage(base64File, fileName, fileType);
-                    console.log('Image uploaded successfully:', result);
-                    setImageUrl(result.imageUrl); // 업로드된 이미지 URL을 상태에 저장
-                } catch (error) {
-                    console.error('Error uploading image:', error);
-                }
-            };
-            fileReader.readAsDataURL(imageFile);
-        }
-    };
-
     return (
         <div className="message-input-container">
             <div className="message-input">
@@ -81,9 +63,6 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                 <button onClick={handleClick} disabled={newMessage.length > 100}>Send</button>
 
                 {/* Picture 버튼 */}
-                <button onClick={handlePictureUpload} disabled={!imageFile}>
-                    Upload Picture
-                </button>
                 <input
                     type="file"
                     accept="image/*"
@@ -94,9 +73,6 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                 <label htmlFor="fileInput" style={{cursor: 'pointer'}}>
                     Select Image
                 </label>
-
-                {/* 선택된 이미지 미리보기 */}
-                {imageUrl && <img src={imageUrl} alt="Preview" width="100"/>}
             </div>
         </div>
     );
