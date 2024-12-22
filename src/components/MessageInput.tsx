@@ -47,6 +47,13 @@ const MessageInput: React.FC<MessageInputProps> = ({
         setNewMessage("");  // 입력창 초기화
         setWarning('');  // 경고 메시지 초기화
         setIsUploading(false);  // 업로드 완료
+        setImageFile(null); // 이미지 파일 초기화 (업로드 후)
+
+        // 파일 선택 초기화
+        const fileInput = document.getElementById('fileInput') as HTMLInputElement | null;
+        if (fileInput) {
+            fileInput.value = ''; // 파일 입력창 초기화
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +101,14 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 <label htmlFor="fileInput" style={{cursor: 'pointer'}}>
                     Select Image
                 </label>
+
+                {/* 선택된 파일 이름을 UI에 표시 */}
+                {imageFile && (
+                    <p>{imageFile.name}</p>  // 선택된 파일 이름 표시
+                )}
+                {!imageFile && (
+                    <p>No file selected</p>  // 파일이 선택되지 않았으면 안내 문구 표시
+                )}
             </div>
         </div>
     );
