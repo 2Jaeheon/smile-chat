@@ -32,7 +32,7 @@ const App: React.FC = () => {
 
             fetchMessages();
 
-            const interval = setInterval(fetchMessages, 15000); // 15초마다 메시지 갱신
+            const interval = setInterval(fetchMessages, 100000); // 100초마다 메시지 갱신
             return () => clearInterval(interval);
         }
     }, [auth.isAuthenticated]);
