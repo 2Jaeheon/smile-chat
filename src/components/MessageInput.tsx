@@ -21,7 +21,8 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Type your message..."
+                    placeholder="Type your message... (Max 100 characters)"
+                    maxLength={100}  // 최대 100자까지 입력 제한
                 />
                 <button onClick={handleClick}>Send</button>
             </div>

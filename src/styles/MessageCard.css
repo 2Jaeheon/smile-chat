@@ -1,15 +1,12 @@
 /* 메시지 카드 스타일 */
 .message-card {
-    padding: 12px;
+    padding: 10px;
     border: 1px solid #ccc; /* 메시지 카드의 테두리 */
     border-radius: 5px; /* 메시지 카드의 모서리 둥글게 */
     background-color: #fff; /* 메시지 카드의 배경색 */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
-    position: relative; /* 이모티콘을 카드 오른쪽 하단에 배치하기 위해 position 설정 */
+    position: relative; /* 이모티콘을 카드 오른쪽 중앙에 배치하기 위해 position 설정 */
     margin-bottom: 10px; /* 카드 간 간격 */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 /* 메시지 카드 헤더 스타일 */
@@ -23,8 +20,7 @@
 .message-content {
     font-size: 16px;
     margin: 5px 0;
-    word-wrap: break-word; /* 긴 단어가 끊어지도록 설정 */
-    margin-bottom: 25px; /* 하단 여백을 추가하여 이모티콘과 겹치지 않도록 설정 */
+
 }
 
 /* 타임스탬프 스타일 */
@@ -36,48 +32,57 @@
 /* 이모티콘 스타일: 카드 오른쪽 하단에 위치 */
 .emoji {
     position: absolute;
-    right: 10px; /* 오른쪽 끝에 위치시킴 */
+    right: 15px; /* 오른쪽 끝에 위치시킴 */
     bottom: 10px; /* 하단에 위치시킴 */
     font-size: 28px; /* 이모티콘 크기 */
 }
 
+
 /* 모바일 화면에서 카드 크기 및 이모티콘 크기 조정 */
 @media (max-width: 768px) {
+    /* 메시지 카드 스타일 */
     .message-card {
-        padding: 10px;
-        font-size: 14px;
+        padding: 8px;
+        font-size: 14px; /* 글자 크기를 줄여서 모바일에 맞게 조정 */
         margin-bottom: 8px; /* 간격 조정 */
     }
 
+    /* 메시지 본문 스타일 */
     .message-content {
-        font-size: 14px;
+        font-size: 14px; /* 모바일 화면에서 메시지 본문 글씨 크기 줄이기 */
     }
 
+    /* 이모티콘 크기 줄이기 */
     .emoji {
-        font-size: 24px;
+        font-size: 24px; /* 모바일 화면에서 이모티콘 크기 줄이기 */
     }
 
+    /* 타임스탬프 스타일 */
     .message-timestamp {
-        font-size: 11px;
+        font-size: 11px; /* 타임스탬프 글자 크기 줄이기 */
     }
 }
 
 @media (max-width: 480px) {
+    /* 메시지 카드 스타일 */
     .message-card {
-        padding: 8px;
-        font-size: 12px;
-        margin-bottom: 6px;
+        padding: 6px;
+        font-size: 12px; /* 글자 크기 더 줄이기 */
+        margin-bottom: 6px; /* 간격 조정 */
     }
 
+    /* 메시지 본문 스타일 */
     .message-content {
-        font-size: 12px;
+        font-size: 12px; /* 모바일 화면에서 본문 글씨 크기 더 줄이기 */
     }
 
+    /* 이모티콘 크기 더 줄이기 */
     .emoji {
-        font-size: 20px;
+        font-size: 20px; /* 모바일에서 이모티콘 크기 줄이기 */
     }
 
+    /* 타임스탬프 스타일 */
     .message-timestamp {
-        font-size: 10px;
+        font-size: 10px; /* 타임스탬프 글씨 크기 줄이기 */
     }
 }
