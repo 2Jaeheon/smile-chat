@@ -1,11 +1,11 @@
 /* 전체 페이지에서 메시지 입력이 맨 아래쪽에 고정될 수 있도록 */
 .message-input-container {
     position: fixed;
-    bottom: 20px; /* 페이지 맨 아래에서 약간 위에 위치하도록 설정 */
+    bottom: 5px; /* 페이지 맨 아래에서 약간 위에 위치하도록 설정 */
     left: 50%;
     transform: translateX(-50%); /* 가로 중앙 정렬 */
     width: 100%;
-    max-width: 800px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
+    max-width: 780px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
     padding: 10px;
     display: flex;
     justify-content: center;
