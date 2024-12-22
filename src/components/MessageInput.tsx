@@ -11,7 +11,7 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
     const handleClick = () => {
         // 메시지 전송 후 입력창 초기화
         handleSendMessage(newMessage);
-        setNewMessage("");  // 입력창 초기화
+        // setNewMessage("");  // 입력창 초기화
     };
 
     return (
