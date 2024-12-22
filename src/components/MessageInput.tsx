@@ -8,6 +8,12 @@ interface MessageInputProps {
 }
 
 const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, handleSendMessage}) => {
+    const handleClick = () => {
+        // 메시지 전송 후 입력창 초기화
+        handleSendMessage(newMessage);
+        setNewMessage("");  // 입력창 초기화
+    };
+
     return (
         <div className="message-input-container">
             <div className="message-input">
@@ -17,7 +23,7 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Type your message..."
                 />
-                <button onClick={() => handleSendMessage(newMessage)}>Send</button>
+                <button onClick={handleClick}>Send</button>
             </div>
         </div>
     );

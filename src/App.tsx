@@ -63,8 +63,6 @@ const App: React.FC = () => {
                 });
 
                 if (response.ok) {
-                    setNewMessage("");  // 메시지 전송 후 입력창 비우기
-
                     // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
                     const updatedMessages = await getMessages();
                     setMessages(updatedMessages);  // 메시지 갱신
@@ -88,7 +86,13 @@ const App: React.FC = () => {
     if (auth.isAuthenticated) {
         return (
             <div>
+
+
                 <h1>Welcome!</h1>
+
+                <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
+                <button onClick={signOutRedirect}>Sign out (Redirect)</button>
+
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
 
                 <div className="Chat">
