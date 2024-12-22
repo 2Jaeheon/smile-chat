@@ -91,7 +91,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 </button>
             </div>
 
-            {/* 파일 선택 부분 */}
+            {/* 파일 선택 부분 (절대 위치로 위치 지정) */}
             <div className="file-input-container">
                 <input
                     type="file"
@@ -104,7 +104,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     Select Image
                 </label>
 
-                {/* 파일 이름 또는 선택되지 않은 경우 안내 메시지 표시 */}
+                {/* 선택된 파일 이름 또는 선택되지 않은 경우 안내 메시지 표시 */}
                 {imageFile ? (
                     <p>{imageFile.name}</p>  // 선택된 파일 이름 표시
                 ) : (
