@@ -14,7 +14,10 @@ interface MessageCardProps {
 const MessageCard: React.FC<MessageCardProps> = ({message}) => {
     return (
         <div className="message-card">
-            <p>{message.content}</p>
+            {/* messageId와 content를 함께 표시 */}
+            <p>
+                <strong>{message.messageId}</strong>: {message.content}
+            </p>
             <small>{new Date(message.timestamp).toLocaleString()}</small>
         </div>
     );
