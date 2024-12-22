@@ -4,21 +4,40 @@
 .message-list {
     display: flex;
     gap: 10px; /* 각 메시지 카드 사이에 간격 추가 */
-    padding: 10px; /* 안쪽 여백 */
+    padding: 15px; /* 안쪽 여백을 약간 더 넉넉히 설정 */
     background-color: #f9f9f9; /* 배경색을 연한 회색으로 */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
-    max-width: 400px;
+    border-radius: 8px; /* 둥근 모서리 */
+    overflow-y: hidden; /* 세로 스크롤 가능하도록 설정 */
+    margin-bottom: 20px; /* 메시지 리스트와 하단 입력창 간의 여백 */
 }
 
-/* 메시지 카드에서 글씨 크기 설정 */
+/* 메시지 카드에서 본문 내용 글씨 크기 설정 */
 .message-card p {
     font-size: 14px;
     color: #333;
+    margin: 0; /* p 태그 기본 여백 제거 */
 }
 
 /* 타임스탬프 스타일 */
 .message-card small {
     font-size: 12px;
     color: #888;
+    display: block;
     text-align: right;
+    margin-top: 5px; /* 타임스탬프와 본문 사이에 여백 추가 */
+}
+
+/* 메시지 리스트의 스크롤이 생길 경우에만 스크롤 표시 */
+.message-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.message-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
