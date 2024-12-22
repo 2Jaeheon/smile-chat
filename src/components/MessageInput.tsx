@@ -4,13 +4,14 @@ import '../styles/MessageInput.css';  // 스타일 파일을 불러옵니다.
 interface MessageInputProps {
     newMessage: string;
     setNewMessage: React.Dispatch<React.SetStateAction<string>>;
-    handleSendMessage: (message: string) => void;  // 메시지 전송 로직을 props로 받음
+    handleSendMessage: (message: { text: string, imageUrl?: string }) => void;  // 메시지와 이미지 URL을 함께 전송
     uploadImage: (file: string, fileName: string, fileType: string) => Promise<any>;  // 이미지 업로드 함수
 }
 
 const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, handleSendMessage, uploadImage}) => {
     const [warning, setWarning] = useState<string>('');
     const [imageFile, setImageFile] = useState<File | null>(null);
+    const [imageUrl, setImageUrl] = useState<string | undefined>(undefined); // 타입을 string | undefined로 수정
 
     const handleClick = () => {
         // 메시지 전송 후 입력창 초기화
@@ -18,9 +19,13 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
             setWarning('메시지는 100자 이하로 작성해주세요.');
             return; // 100자 초과하면 전송되지 않도록 처리
         }
-        handleSendMessage(newMessage);
+
+        // 메시지와 이미지 URL을 함께 전송
+        handleSendMessage({text: newMessage, imageUrl});
+
         setNewMessage("");  // 입력창 초기화
         setWarning('');  // 경고 메시지 초기화
+        setImageUrl(undefined); // 이미지 URL 초기화
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +57,7 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                 try {
                     const result = await uploadImage(base64File, fileName, fileType);
                     console.log('Image uploaded successfully:', result);
-                    // 업로드 후 이미지 URL 등을 다루는 추가 로직을 여기에 작성할 수 있습니다.
+                    setImageUrl(result.imageUrl); // 업로드된 이미지 URL을 상태에 저장
                 } catch (error) {
                     console.error('Error uploading image:', error);
                 }
@@ -89,6 +94,9 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                 <label htmlFor="fileInput" style={{cursor: 'pointer'}}>
                     Select Image
                 </label>
+
+                {/* 선택된 이미지 미리보기 */}
+                {imageUrl && <img src={imageUrl} alt="Preview" width="100"/>}
             </div>
         </div>
     );
