@@ -7,6 +7,8 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* 약간의 그림자 */
     position: relative; /* 이모티콘을 카드 오른쪽 중앙에 배치하기 위해 position 설정 */
     margin-bottom: 10px; /* 카드 간 간격 */
+    word-wrap: break-word; /* 긴 단어가 넘치지 않도록 처리 */
+    white-space: pre-wrap; /* 줄바꿈을 허용 */
 }
 
 /* 메시지 카드 헤더 스타일 */
