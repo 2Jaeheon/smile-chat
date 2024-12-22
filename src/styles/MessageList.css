@@ -3,8 +3,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px; /* 메시지 간 간격 */
-    height: 650px;
-    max-hegiht: 650px;
+    height: 600px;
+    max-hegiht: 600px;
     padding-left: 200px;
     padding-right: 200px;
     margin-bottom: 20px; /* 리스트 아래쪽에 여백 추가 */
