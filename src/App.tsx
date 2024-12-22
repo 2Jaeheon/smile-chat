@@ -96,14 +96,14 @@ const App: React.FC = () => {
                 <div className="Chat">
                     <h2>Real-time Chat</h2>
                     <MessageList messages={messages}/>
-                </div>
 
-                {/* 메시지 입력 컴포넌트 호출 */}
-                <MessageInput
-                    newMessage={newMessage}
-                    setNewMessage={setNewMessage}
-                    handleSendMessage={handleSendMessage}
-                />
+                    {/* 메시지 입력 컴포넌트 호출 */}
+                    <MessageInput
+                        newMessage={newMessage}
+                        setNewMessage={setNewMessage}
+                        handleSendMessage={handleSendMessage}
+                    />
+                </div>
             </div>
         );
     }
