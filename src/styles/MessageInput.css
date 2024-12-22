@@ -1,14 +1,52 @@
+/* 전체 페이지에서 메시지 입력이 맨 아래쪽에 고정될 수 있도록 */
+.message-input-container {
+    position: fixed;
+    bottom: 20px; /* 페이지 맨 아래에서 약간 위에 위치하도록 설정 */
+    left: 50%;
+    transform: translateX(-50%); /* 가로 중앙 정렬 */
+    width: 100%;
+    max-width: 600px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 메시지 입력 필드 스타일링 */
 .message-input {
     display: flex;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 5px;
     align-items: center;
 }
 
+/* 텍스트 입력 필드 스타일링 */
 .message-input input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: none;
     margin-right: 10px;
-    padding: 5px;
-    width: 80%;
 }
 
+/* 전송 버튼 스타일링 */
 .message-input button {
-    padding: 5px 10px;
+    background-color: #4CAF50; /* 녹색 */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* 버튼 호버 스타일링 */
+.message-input button:hover {
+    background-color: #45a049;
 }
