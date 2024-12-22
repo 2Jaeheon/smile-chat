@@ -12,13 +12,16 @@ interface MessageCardProps {
 }
 
 const MessageCard: React.FC<MessageCardProps> = ({message}) => {
+
+    const formattedTimestamp = new Date(Number(message.timestamp) * 1000).toLocaleString();
+
     return (
         <div className="message-card">
             {/* messageId와 content를 함께 표시 */}
             <p>
                 <strong>{message.messageId}</strong>: {message.content}
             </p>
-            <small>{new Date(message.timestamp).toLocaleString()}</small>
+            <small>{formattedTimestamp}</small>
         </div>
     );
 };
