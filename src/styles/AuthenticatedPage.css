@@ -5,6 +5,11 @@
     color: #333;
 }
 
+html, body {
+    overflow: hidden; /* 오버플로우 방지 */
+}
+
+
 .header {
     text-align: center;
 }
