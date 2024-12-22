@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px; /* 메시지 간 간격 */
-    max-height: calc(6 * 80px); /* 메시지 카드 높이(예: 80px) × 6 */
+    max-height: calc(6 * 100px); /* 메시지 카드 높이(예: 80px) × 6 */
     overflow-y: auto; /* 스크롤 가능 */
     padding: 10px;
     border: 1px solid #ddd; /* 외곽선 */
