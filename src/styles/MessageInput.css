@@ -125,10 +125,12 @@
 @media (max-width: 480px) {
     .message-input {
         width: 80%;
+        margin: 0 auto;
     }
 
     .file-input-container {
         width: 100%;
+        margin: 0 auto;
     }
 
     .message-input-container {
