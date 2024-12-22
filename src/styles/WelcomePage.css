@@ -4,7 +4,7 @@ body {
     margin: 0;
     font-family: "Arial", sans-serif;
     color: #333;
-    background-color: #e8f5e9; /* 배경색 추가 */
+    /*background-color: #e8f5e9; !* 배경색 추가 *!*/
 }
 
 .welcome-container {
@@ -14,6 +14,7 @@ body {
     height: 100vh;
     padding: 20px; /* 모바일에서 여백 추가 */
     box-sizing: border-box;
+    background-color: #e8f5e9;
 }
 
 .welcome-content {
@@ -64,7 +65,6 @@ p {
 /* 모바일 환경에서 반응형 처리 */
 @media (max-width: 768px) {
     .welcome-container {
-        height: auto; /* 모바일에서 높이 자동 조정 */
         padding: 10px; /* 여백 줄이기 */
     }
 
