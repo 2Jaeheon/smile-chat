@@ -24,6 +24,7 @@ function App() {
             <div>
                 <h1>Welcome!</h1>
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
+                <pre>Nickname: {auth.user?.profile.nickname || "No Nickname Available"}</pre>
                 <pre>Name: {auth.user?.profile.name || "No Name Available"}</pre>
                 <pre>ID Token: {auth.user?.id_token}</pre>
                 <pre>Access Token: {auth.user?.access_token}</pre>
