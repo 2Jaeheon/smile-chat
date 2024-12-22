@@ -14,7 +14,7 @@ interface MessageListProps {
 
 const MessageList: React.FC<MessageListProps> = ({messages}) => {
     // 최근 10개의 메시지만 표시
-    const recentMessages = messages.slice(-10);
+    const recentMessages = messages.slice(-6);
 
     return (
         <div className="message-list">
