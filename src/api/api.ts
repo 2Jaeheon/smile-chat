@@ -1,5 +1,7 @@
 const API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI'; // 엔드포인트 URL
 const API_KEY = process.env.REACT_APP_API_KEY;
+const MESSAGE_SEND_API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI/messages'; // 엔드포인트 URL
+
 
 // GET 요청: 전체 메시지 불러오기
 export const getMessages = async (): Promise<any[]> => {
@@ -36,7 +38,7 @@ export const addMessage = async (message: {
     sentiment: string;
 }): Promise<any> => {
     try {
-        const response = await fetch(API_URL + "/messages", {
+        const response = await fetch(MESSAGE_SEND_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
