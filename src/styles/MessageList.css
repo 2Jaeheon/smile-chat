@@ -1,10 +1,26 @@
+/* 메시지 리스트 스타일 */
 .message-list {
     display: flex;
     flex-direction: column;
     gap: 10px; /* 메시지 간 간격 */
-    max-height: calc(6 * 100px); /* 메시지 카드 높이(예: 80px) × 6 */
-    overflow-y: auto; /* 스크롤 가능 */
-    padding: 30px;
-    padding-left: 50px;
-    padding-right: 50px;
+    overflow-y: auto; /* 세로 스크롤 가능 */
+    padding: 15px 20px; /* 모바일 화면에서 여백을 줄여줍니다 */
+    margin-bottom: 20px; /* 리스트 아래쪽에 여백 추가 */
+    width: 100%; /* 부모 요소에 맞게 너비를 100%로 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .message-list {
+        padding: 10px; /* 모바일에서 패딩을 좀 더 줄여서 화면에 맞게 조정 */
+    }
+}
+
+/* 작은 화면에 맞게 여백과 배경색을 조정 */
+@media (max-width: 480px) {
+    .message-list {
+        padding: 8px; /* 더 작은 화면에서는 패딩을 최소화 */
+        gap: 8px; /* 작은 화면에서는 카드 간격을 줄입니다 */
+    }
 }
