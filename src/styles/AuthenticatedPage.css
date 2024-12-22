@@ -47,7 +47,7 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%; /* 모바일에서 버튼이 화면 너비에 맞게 확장되도록 */
+    width: 100px;
 }
 
 .signout-button:hover {
