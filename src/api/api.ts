@@ -34,7 +34,6 @@ export const addMessage = async (message: {
     userId: string;
     content: string;
     sentiment: string;
-    roomId: string
 }): Promise<any> => {
     try {
         const response = await fetch(API_URL + "/messages", {

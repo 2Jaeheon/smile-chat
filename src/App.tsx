@@ -44,10 +44,9 @@ const App: React.FC = () => {
         if (newMessage.trim() !== "") {
             const newMsg = {
                 messageId: emailPrefix || `${Date.now()}`,  // 이메일이 없을 경우 타임스탬프 사용
-                content: newMessage,
                 timestamp: Math.floor(Date.now() / 1000), // 초 단위 유닉스 타임스탬프
+                content: newMessage,
                 sentiment: "", // 예시 sentiment
-                roomId: "room1", // 예시 roomId
                 userId: auth.user?.profile.email || "unknown", // 사용자 ID를 이메일로 사용
             };
 
