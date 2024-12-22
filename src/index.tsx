@@ -1,7 +1,7 @@
 // index.tsx
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {AuthProvider, AuthProviderProps} from "react-oidc-context"; // AuthProviderProps로 타입 선언
+import {AuthProvider} from "react-oidc-context"; // AuthProviderProps로 타입 선언
 import App from "./App";
 
 const cognitoAuthConfig = {

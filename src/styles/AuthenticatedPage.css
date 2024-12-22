@@ -1,0 +1,55 @@
+/* AuthenticatedPage.css */
+
+.authenticated-container {
+    font-family: "Arial", sans-serif;
+    padding: 20px;
+    background-color: #f4f4f9; /* 부드러운 배경 */
+    color: #333;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.header h1 span {
+    color: #2ecc71; /* 초록색 포인트 */
+}
+
+.user-info {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.signout-button {
+    background: #2ecc71; /* 초록색 버튼 */
+    color: white;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signout-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+}
+
+.chat-section {
+    margin-top: 20px;
+}
+
+.chat-section h2 {
+    font-size: 1.8rem;
+    color: #2ecc71; /* 초록색 포인트 */
+    margin-bottom: 15px;
+}

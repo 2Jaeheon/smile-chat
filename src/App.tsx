@@ -3,6 +3,8 @@ import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
 import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌트 추가
 import {getMessages} from "./api/api"; // addMessage를 여기서 호출하지 않음
+import LoadingSpinner from "./components/LoadingSpinner"; // 로딩 스피너 추가
+import "./styles/WelcomePage.css"; // WelcomePage 스타일 추가
 
 interface Message {
     messageId: string;
@@ -76,7 +78,7 @@ const App: React.FC = () => {
     };
 
     if (auth.isLoading) {
-        return <div>Loading...</div>;
+        return <LoadingSpinner/>;
     }
 
     if (auth.error) {
@@ -86,32 +88,44 @@ const App: React.FC = () => {
     if (auth.isAuthenticated) {
         return (
             <div>
-                <h1>Welcome!</h1>
+                <div className="authenticated-container">
+                    <div className="header">
+                        <h1>
+                            Welcome to <span>Smile-Chat</span>!
+                        </h1>
+                        <p className="user-info">
+                            Logged in as: <strong>{auth.user?.profile.email || "No Email Available"}</strong>
+                        </p>
+                        <button className="signout-button" onClick={() => signOutRedirect()}>
+                            Sign Out
+                        </button>gi
+                    </div>
+                    <div className="chat-section">
+                        <h2>Real-time Chat</h2>
+                        <MessageList messages={messages}/>
 
-                <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
-                <button onClick={signOutRedirect}>Sign out (Redirect)</button>
-
-                <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
-
-                <div className="Chat">
-                    <h2>Real-time Chat</h2>
-                    <MessageList messages={messages}/>
-
-                    {/* 메시지 입력 컴포넌트 호출 */}
-                    <MessageInput
-                        newMessage={newMessage}
-                        setNewMessage={setNewMessage}
-                        handleSendMessage={handleSendMessage}
-                    />
+                        <MessageInput
+                            newMessage={newMessage}
+                            setNewMessage={setNewMessage}
+                            handleSendMessage={handleSendMessage}
+                        />
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div>
-            <h1>Login Required</h1>
-            <button onClick={() => auth.signinRedirect()}>Sign in</button>
+        <div className="welcome-container">
+            <div className="welcome-content">
+                <h1>
+                    Welcome to <br/><span>Smile-Chat</span>!
+                </h1>
+                <p>Join our platform</p>
+                <button className="welcome-button" onClick={() => auth.signinRedirect()}>
+                    Get Started
+                </button>
+            </div>
         </div>
     );
 };
