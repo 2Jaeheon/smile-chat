@@ -26,6 +26,7 @@ export const getMessages = async (): Promise<any[]> => {
     }
 };
 
+
 // POST 요청: 새로운 메시지 추가
 export const addMessage = async (message: {
     messageId: string;
@@ -36,7 +37,7 @@ export const addMessage = async (message: {
     roomId: string
 }): Promise<any> => {
     try {
-        const response = await fetch(API_URL, {
+        const response = await fetch(API_URL + "/messages", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
