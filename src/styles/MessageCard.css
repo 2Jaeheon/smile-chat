@@ -20,7 +20,6 @@
 .message-content {
     font-size: 16px;
     margin: 5px 0;
-
 }
 
 /* 타임스탬프 스타일 */
@@ -29,14 +28,14 @@
     color: #888;
 }
 
-/* 이모티콘 스타일: 카드 오른쪽 하단에 위치 */
+/* 이모티콘 스타일: 오른쪽 중앙에 위치 */
 .emoji {
     position: absolute;
-    right: 15px; /* 오른쪽 끝에 위치시킴 */
-    bottom: 10px; /* 하단에 위치시킴 */
+    right: 10px; /* 이모티콘을 오른쪽에 위치시킴 */
+    top: 50%;
+    transform: translateY(-50%); /* 중앙 정렬 */
     font-size: 28px; /* 이모티콘 크기 */
 }
-
 
 /* 모바일 화면에서 카드 크기 및 이모티콘 크기 조정 */
 @media (max-width: 768px) {
