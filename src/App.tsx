@@ -27,6 +27,27 @@ const App: React.FC = () => {
         window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
 
+    // 사진 업로드 처리 함수
+    const handleImageUpload = async (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch('/upload-image', {  // 서버에 업로드 요청
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            const imageUrl = data.imageUrl; // 반환된 이미지 URL
+
+            // 이미지 URL을 메시지 내용에 포함시키기
+            const updatedMessage = `${newMessage} <img src="${imageUrl}" alt="Uploaded Image" />`;
+            handleSendMessage(updatedMessage); // 메시지 전송
+        } catch (error) {
+            console.error('Image upload failed', error);
+        }
+    };
+    
     // 메시지 데이터 가져오기
     useEffect(() => {
         if (auth.isAuthenticated) {
@@ -110,6 +131,7 @@ const App: React.FC = () => {
                             newMessage={newMessage}
                             setNewMessage={setNewMessage}
                             handleSendMessage={handleSendMessage}
+                            handleImageUpload={handleImageUpload}
                         />
                     </div>
                 </div>
