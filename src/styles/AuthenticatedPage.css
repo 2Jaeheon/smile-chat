@@ -97,17 +97,17 @@ body {
 @media (max-width: 480px) {
     /* 모바일에서 버튼 크기 더 줄이기 */
     .signout-button {
-        font-size: 1rem;
-        padding: 10px 15px;
+        font-size: 0.7rem;
+        padding: 7px 12px;
     }
 
     /* 모바일 화면에서 텍스트 크기 줄이기 */
     .header h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .chat-section h2 {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .user-info {
