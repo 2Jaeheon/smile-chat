@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
 import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌트 추가
-import {getMessages} from "./api/api"; // addMessage를 여기서 호출하지 않음
+import {getMessages, uploadImage} from "./api/api"; // addMessage를 여기서 호출하지 않음
 import LoadingSpinner from "./components/LoadingSpinner"; // 로딩 스피너 추가
 import "./styles/WelcomePage.css"; // WelcomePage 스타일 추가
 import "./styles/AuthenticatedPage.css";
@@ -27,27 +27,6 @@ const App: React.FC = () => {
         window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
 
-    // 사진 업로드 처리 함수
-    const handleImageUpload = async (file: File) => {
-        const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-            const response = await fetch('/upload-image', {  // 서버에 업로드 요청
-                method: 'POST',
-                body: formData
-            });
-            const data = await response.json();
-            const imageUrl = data.imageUrl; // 반환된 이미지 URL
-
-            // 이미지 URL을 메시지 내용에 포함시키기
-            const updatedMessage = `${newMessage} <img src="${imageUrl}" alt="Uploaded Image" />`;
-            handleSendMessage(updatedMessage); // 메시지 전송
-        } catch (error) {
-            console.error('Image upload failed', error);
-        }
-    };
-    
     // 메시지 데이터 가져오기
     useEffect(() => {
         if (auth.isAuthenticated) {
@@ -131,7 +110,7 @@ const App: React.FC = () => {
                             newMessage={newMessage}
                             setNewMessage={setNewMessage}
                             handleSendMessage={handleSendMessage}
-                            handleImageUpload={handleImageUpload}
+                            uploadImage={uploadImage}  // 사진 업로드 함수 전달
                         />
                     </div>
                 </div>

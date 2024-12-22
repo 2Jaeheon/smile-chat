@@ -62,18 +62,25 @@ export const addMessage = async (message: {
 
 const UPLOAD_API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI'; // 이미지 업로드를 위한 API 엔드포인트
 
-export const uploadImageToS3 = async (file: File): Promise<string> => {
-    // FormData 생성하여 파일을 전송
-    const formData = new FormData();
-    formData.append('file', file);  // 파일을 'file' 키로 추가
 
+// POST 요청: 이미지 업로드
+export const uploadImage = async (file: string, fileName: string, fileType: string): Promise<any> => {
     try {
+        // 전송할 데이터 준비
+        const requestBody = {
+            file,
+            fileName,
+            fileType,
+        };
+
+        // API에 POST 요청 보내기
         const response = await fetch(UPLOAD_API_URL, {
             method: 'POST',
-            body: formData,  // FormData로 파일을 전송
             headers: {
-                'x-api-key': API_KEY || '', // API 키 포함
+                'Content-Type': 'application/json',
+                'x-api-key': process.env.REACT_APP_API_KEY || '', // API 키 헤더에 포함
             },
+            body: JSON.stringify(requestBody), // Base64로 인코딩된 파일과 메타데이터를 전달
         });
 
         if (!response.ok) {
@@ -81,8 +88,9 @@ export const uploadImageToS3 = async (file: File): Promise<string> => {
             throw new Error('Failed to upload image');
         }
 
-        const data = await response.json();
-        return data.imageUrl;  // S3에서 반환된 이미지 URL 반환
+        // 응답 본문을 JSON으로 파싱
+        const responseBody = await response.json();
+        return responseBody;  // 이미지 URL 등을 포함한 응답 데이터 반환
     } catch (error) {
         console.error('Error uploading image:', error);
         throw error;
