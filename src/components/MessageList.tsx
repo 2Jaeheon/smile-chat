@@ -6,6 +6,7 @@ interface Message {
     messageId: string;
     content: string;
     timestamp: string;
+    sentiment: string;
 }
 
 interface MessageListProps {
@@ -13,7 +14,7 @@ interface MessageListProps {
 }
 
 const MessageList: React.FC<MessageListProps> = ({messages}) => {
-    // 최근 10개의 메시지만 표시
+    // 최근 6개의 메시지만 표시
     const recentMessages = messages.slice(-6);
 
     return (
