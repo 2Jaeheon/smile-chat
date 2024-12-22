@@ -16,9 +16,9 @@ const App: React.FC = () => {
 
     // 로그아웃 리다이렉트 함수
     const signOutRedirect = () => {
-        const clientId = "4vn8p9ll3da0qq7k96lk67sapf";
-        const logoutUri = "http://localhost:3000"; // 로그아웃 후 리다이렉트될 URI
-        const cognitoDomain = "https://us-east-1ujnrl70cn.auth.us-east-1.amazoncognito.com";
+        const clientId = "120khnbm0ba76or8nrvp06gvho";
+        const logoutUri = "https://main.d1ysbm4jnf6x6r.amplifyapp.com"; // 로그아웃 후 리다이렉트될 URI
+        const cognitoDomain = "https://us-east-1mlfnl7vto.auth.us-east-1.amazoncognito.com";
         window.location.href = `${cognitoDomain}/logout?client_id=${clientId}&logout_uri=${encodeURIComponent(logoutUri)}`;
     };
 
@@ -59,24 +59,13 @@ const App: React.FC = () => {
         return <div>Error: {auth.error.message}</div>;
     }
 
-    console.log(auth.user?.profile)
-    console.log(auth.user?.profile.email);
-    console.log(auth.user?.profile.nickname);
-    console.log(auth.user?.profile.preferred_username);
-    console.log(auth.user?.profile.phone_number);
-
-
     if (auth.isAuthenticated) {
         return (
             <div>
                 <h1>Welcome!</h1>
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
-                <pre>Nickname: {auth.user?.profile.nickname || "No Nickname Available"}</pre>
-                <pre>Username: {auth.user?.profile.preferred_username || "No Username Available"}</pre>
-                <pre>Phone Number: {auth.user?.profile.phone_number || "No Phone Number Available"}</pre>
-                <pre>Sub: {auth.user?.profile.sub || "No Sub Available"}</pre>
-                <pre>Name: {auth.user?.profile.name || "No Name Available"}</pre>
                 <pre>ID Token: {auth.user?.id_token}</pre>
+
                 <pre>Access Token: {auth.user?.access_token}</pre>
                 <pre>Refresh Token: {auth.user?.refresh_token}</pre>
 
