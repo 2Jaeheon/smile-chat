@@ -89,8 +89,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 <button onClick={handleClick} disabled={newMessage.length > 100 || isUploading}>
                     {isUploading ? 'Uploading...' : 'Send'}
                 </button>
+            </div>
 
-                {/* Picture 버튼 */}
+            {/* 파일 선택 부분 */}
+            <div className="file-input-container">
                 <input
                     type="file"
                     accept="image/*"
@@ -102,14 +104,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     Select Image
                 </label>
 
-                {/* 파일 선택 후 파일 이름을 표시 */}
-                <div className="file-info">
-                    {imageFile ? (
-                        <p>Selected File: {imageFile.name}</p>
-                    ) : (
-                        <p>No file selected</p>
-                    )}
-                </div>
+                {/* 파일 이름 또는 선택되지 않은 경우 안내 메시지 표시 */}
+                {imageFile ? (
+                    <p>{imageFile.name}</p>  // 선택된 파일 이름 표시
+                ) : (
+                    <p>No file selected</p>  // 파일이 선택되지 않았으면 안내 문구 표시
+                )}
             </div>
         </div>
     );

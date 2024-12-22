@@ -64,26 +64,3 @@
     text-align: center;
 }
 
-.message-input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
-.message-input {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-input[type="text"] {
-    margin-bottom: 10px;
-}
-
-
-.file-info {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #555;
-}
