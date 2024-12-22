@@ -95,6 +95,10 @@
         width: 80%;
     }
 
+    .file-input-container {
+        width: 100%;
+    }
+
     .message-input-container {
         padding: 8px;
     }
@@ -121,6 +125,10 @@
 @media (max-width: 480px) {
     .message-input {
         width: 80%;
+    }
+
+    .file-input-container {
+        width: 100%;
     }
 
     .message-input-container {
