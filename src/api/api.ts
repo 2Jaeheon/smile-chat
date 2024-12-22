@@ -62,23 +62,22 @@ export const addMessage = async (message: {
 
 const UPLOAD_API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI'; // 이미지 업로드를 위한 API 엔드포인트
 
-
-// POST 요청: 이미지 업로드
 export const uploadImage = async (file: File, fileName: string, fileType: string): Promise<any> => {
     try {
-        // FormData 객체를 사용하여 파일을 전송
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('fileName', fileName);
-        formData.append('fileType', fileType);
+        // FormData 대신 JSON 객체 사용
+        const fileData = {
+            file: await fileToBase64(file), // 파일을 base64로 변환
+            fileName: fileName,
+            fileType: fileType
+        };
 
-        // API에 POST 요청 보내기
         const response = await fetch(UPLOAD_API_URL, {
             method: 'POST',
             headers: {
-                'x-api-key': process.env.REACT_APP_API_KEY || '', // API 키 헤더에 포함
+                'Content-Type': 'application/json', // JSON 컨텐츠 타입 명시
+                'x-api-key': process.env.REACT_APP_API_KEY || '',
             },
-            body: formData,  // FormData로 파일을 전송
+            body: JSON.stringify(fileData), // JSON 형식으로 변환하여 전송
         });
 
         if (!response.ok) {
@@ -86,11 +85,20 @@ export const uploadImage = async (file: File, fileName: string, fileType: string
             throw new Error('Failed to upload image');
         }
 
-        // 응답 본문을 JSON으로 파싱
         const responseBody = await response.json();
-        return responseBody;  // 이미지 URL 등을 포함한 응답 데이터 반환
+        return responseBody;
     } catch (error) {
         console.error('Error uploading image:', error);
         throw error;
     }
+};
+
+// 파일을 base64로 변환하는 헬퍼 함수
+const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = error => reject(error);
+    });
 };
