@@ -62,9 +62,14 @@ const App: React.FC = () => {
     if (auth.isAuthenticated) {
         return (
             <div>
-                <h1>Welcome to the Chat!</h1>
+                <h1>Welcome!</h1>
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
                 <pre>Nickname: {auth.user?.profile.nickname || "No Nickname Available"}</pre>
+                <pre>Name: {auth.user?.profile.name || "No Name Available"}</pre>
+                <pre>ID Token: {auth.user?.id_token}</pre>
+                <pre>Access Token: {auth.user?.access_token}</pre>
+                <pre>Refresh Token: {auth.user?.refresh_token}</pre>
+
                 <button onClick={() => auth.removeUser()}>Sign out (OIDC)</button>
                 <button onClick={signOutRedirect}>Sign out (Redirect)</button>
 
