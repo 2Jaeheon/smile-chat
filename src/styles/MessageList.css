@@ -2,24 +2,25 @@
 
 /* 메시지 리스트의 전체 스타일 */
 .message-list {
-    max-height: 400px; /* 높이를 제한하여 메시지들이 일정 영역 내에 표시되게 */
-    overflow: hidden;  /* 스크롤을 막고, 스크롤 영역을 표시하지 않음 */
     display: flex;
-    flex-direction: column-reverse; /* 최신 메시지가 맨 아래에 오도록 설정 */
+    flex-direction: column-reverse; /* 최신 메시지가 맨 아래로 표시되도록 */
     gap: 10px; /* 각 메시지 카드 사이에 간격 추가 */
     padding: 10px; /* 안쪽 여백 */
-    border: 1px solid #ddd; /* 메시지 리스트에 테두리 추가 */
+    border: 1px solid #ddd; /* 테두리 추가 */
     border-radius: 8px; /* 둥근 모서리 */
     background-color: #f9f9f9; /* 배경색을 연한 회색으로 */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 미세한 그림자 효과 */
+    overflow-y: auto; /* 세로 스크롤 가능하도록 설정 */
+    max-height: 500px; /* 메시지 리스트의 최대 높이를 지정하여 스크롤 가능 */
 }
 
-
+/* 메시지 카드에서 글씨 크기 설정 */
 .message-card p {
     font-size: 14px;
     color: #333;
 }
 
+/* 타임스탬프 스타일 */
 .message-card small {
     font-size: 12px;
     color: #888;
