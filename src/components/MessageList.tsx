@@ -23,9 +23,14 @@ const MessageList: React.FC<MessageListProps> = ({messages}) => {
         }
     }, [messages]);
 
+    // 메시지를 timestamp 기준으로 내림차순 정렬
+    const sortedMessages = [...messages].sort((a, b) => {
+        return Number(a.timestamp) - Number(b.timestamp); // 오름차순으로 정렬
+    });
+
     return (
         <div className="message-list" ref={messageListRef}>
-            {messages.map((message) => (
+            {sortedMessages.map((message) => (
                 <MessageCard key={message.messageId} message={message}/>
             ))}
         </div>
