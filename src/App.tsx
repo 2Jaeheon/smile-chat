@@ -59,12 +59,22 @@ const App: React.FC = () => {
         return <div>Error: {auth.error.message}</div>;
     }
 
+    console.log(auth.user?.profile)
+    console.log(auth.user?.profile.email);
+    console.log(auth.user?.profile.nickname);
+    console.log(auth.user?.profile.preferred_username);
+    console.log(auth.user?.profile.phone_number);
+
+
     if (auth.isAuthenticated) {
         return (
             <div>
                 <h1>Welcome!</h1>
                 <pre>Email: {auth.user?.profile.email || "No Email Available"}</pre>
                 <pre>Nickname: {auth.user?.profile.nickname || "No Nickname Available"}</pre>
+                <pre>Username: {auth.user?.profile.preferred_username || "No Username Available"}</pre>
+                <pre>Phone Number: {auth.user?.profile.phone_number || "No Phone Number Available"}</pre>
+                <pre>Sub: {auth.user?.profile.sub || "No Sub Available"}</pre>
                 <pre>Name: {auth.user?.profile.name || "No Name Available"}</pre>
                 <pre>ID Token: {auth.user?.id_token}</pre>
                 <pre>Access Token: {auth.user?.access_token}</pre>
