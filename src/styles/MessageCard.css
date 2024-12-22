@@ -32,7 +32,7 @@
 .emoji {
     position: absolute;
     right: 10px; /* 오른쪽 끝에 위치시킴 */
-    bottom: 10px; /* 하단에 위치시킴 */
+    bottom: 7px; /* 하단에 위치시킴 */
     font-size: 25px; /* 이모티콘 크기 */
 }
 
