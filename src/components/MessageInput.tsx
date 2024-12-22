@@ -11,7 +11,7 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
     const handleClick = () => {
         // 메시지 전송 후 입력창 초기화
         handleSendMessage(newMessage);
-        setNewMessage("");  // 입력창 초기화
+        // setNewMessage("");  // 입력창 초기화
     };
 
     return (
@@ -21,11 +21,9 @@ const MessageInput: React.FC<MessageInputProps> = ({newMessage, setNewMessage, h
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    placeholder="Type your message... (Max 100 characters)"
-                    maxLength={100}  // 최대 100자까지 입력 제한
+                    placeholder="Type your message..."
                 />
-                <button type="button" onClick={handleClick}>Send</button>
-                {/* type="button"으로 설정 */}
+                <button onClick={handleClick}>Send</button>
             </div>
         </div>
     );
