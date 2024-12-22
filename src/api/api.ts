@@ -59,3 +59,32 @@ export const addMessage = async (message: {
         throw error;
     }
 };
+
+const UPLOAD_API_URL = 'https://ymamtrtb5e.execute-api.us-east-1.amazonaws.com/MessageAPI'; // 이미지 업로드를 위한 API 엔드포인트
+
+export const uploadImageToS3 = async (file: File): Promise<string> => {
+    // FormData 생성하여 파일을 전송
+    const formData = new FormData();
+    formData.append('file', file);  // 파일을 'file' 키로 추가
+
+    try {
+        const response = await fetch(UPLOAD_API_URL, {
+            method: 'POST',
+            body: formData,  // FormData로 파일을 전송
+            headers: {
+                'x-api-key': API_KEY || '', // API 키 포함
+            },
+        });
+
+        if (!response.ok) {
+            console.error('Failed to upload image. Status:', response.status, 'Message:', await response.text());
+            throw new Error('Failed to upload image');
+        }
+
+        const data = await response.json();
+        return data.imageUrl;  // S3에서 반환된 이미지 URL 반환
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        throw error;
+    }
+};
