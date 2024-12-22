@@ -1,18 +1,19 @@
-/* 메시지 입력 컴포넌트 */
+/* 전체 페이지에서 메시지 입력이 맨 아래쪽에 고정될 수 있도록 */
 .message-input-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 0px; /* 페이지 맨 아래에서 약간 위에 위치하도록 설정 */
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* 가로 중앙 정렬 */
     width: 100%;
-    max-width: 800px; /* 최대 너비 설정 */
-    padding: 10px;
+    max-width: 780px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
+    padding: 8px;
     display: flex;
+    flex-direction: column; /* 입력창과 파일 선택 부분이 세로로 배치되도록 설정 */
     justify-content: center;
-    z-index: 10;
+    z-index: 10; /* 다른 요소들 위에 위치하도록 설정 */
 }
 
-/* 메시지 입력 필드 */
+/* 메시지 입력 필드 스타일링 */
 .message-input {
     display: flex;
     width: 100%;
@@ -21,10 +22,10 @@
     border-radius: 20px;
     padding: 5px;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* 입력창과 파일 선택 부분 사이에 여백 추가 */
 }
 
-/* 텍스트 입력 필드 */
+/* 텍스트 입력 필드 스타일링 */
 .message-input input {
     flex: 1;
     border: none;
@@ -36,9 +37,9 @@
     margin-right: 10px;
 }
 
-/* 전송 버튼 */
+/* 전송 버튼 스타일링 */
 .message-input button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* 녹색 */
     color: white;
     padding: 10px 20px;
     border: none;
@@ -48,35 +49,45 @@
     transition: background-color 0.3s;
 }
 
-/* 버튼 호버 */
+/* 버튼 호버 스타일링 */
 .message-input button:hover {
     background-color: #45a049;
 }
 
-/* 경고 메시지 */
+/* 경고 메시지 스타일: 입력창 위에 표시되도록 설정 */
 .warning-message {
     color: red;
     font-size: 12px;
     margin-bottom: 5px;
-    position: absolute;
-    top: -25px;
+    position: absolute; /* 입력창 위에 위치시키기 위해 절대 위치 설정 */
+    top: -25px; /* 입력창 위로 이동 */
     left: 0;
     width: 100%;
     text-align: center;
 }
 
-/* 파일 선택 부분 */
+/* 파일 선택 및 파일 이름 표시 부분 */
 .file-input-container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 10px;
+    flex-direction: column; /* 세로로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    width: 100%;
 }
 
+/* 파일 선택 레이블 스타일 */
 .file-input-container label {
     cursor: pointer;
-    margin-bottom: 5px;
+    font-size: 14px;
+    color: #007bff;
 }
+
+/* 파일 이름 또는 선택되지 않았을 때 표시할 문구 스타일 */
+.file-input-container p {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #6c757d;
+}
+
 
 /* 모바일 화면에 대한 반응형 */
 @media (max-width: 768px) {
