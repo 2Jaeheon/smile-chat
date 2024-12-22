@@ -13,15 +13,16 @@ interface MessageCardProps {
 
 const MessageCard: React.FC<MessageCardProps> = ({message}) => {
 
+    // 유닉스 타임스탬프를 날짜 포맷으로 변환
     const formattedTimestamp = new Date(Number(message.timestamp) * 1000).toLocaleString();
 
     return (
         <div className="message-card">
-            {/* messageId와 content를 함께 표시 */}
-            <p>
-                <strong>{message.messageId}</strong>: {message.content}
-            </p>
-            <small>{formattedTimestamp}</small>
+            <div className="message-header">
+                <strong className="message-id">{message.messageId}</strong>
+            </div>
+            <p className="message-content">{message.content}</p>
+            <small className="message-timestamp">{formattedTimestamp}</small>
         </div>
     );
 };
