@@ -1,11 +1,12 @@
 .message-list {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* 메시지 카드 간의 간격 */
+    gap: 10px; /* 메시지 간 간격 */
+    max-height: calc(6 * 80px); /* 메시지 카드 높이(예: 80px) × 6 */
     overflow-y: auto; /* 스크롤 가능 */
     padding: 10px;
+    border: 1px solid #ddd; /* 외곽선 */
+    border-radius: 5px; /* 모서리 둥글게 */
     background-color: #f9f9f9; /* 배경색 */
-    border-radius: 8px; /* 테두리 둥글게 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 효과 */
-    border: 1px solid #ddd; /* 경계선 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
 }
