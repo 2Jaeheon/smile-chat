@@ -4,17 +4,20 @@
     flex-direction: column;
     gap: 10px; /* 메시지 간 간격 */
     height: 670px; /* 높이를 60px로 설정 */
+    max-hegiht: 700px;
     padding-left: 200px;
     padding-right: 200px;
     margin-bottom: 20px; /* 리스트 아래쪽에 여백 추가 */
     width: 100%; /* 부모 요소에 맞게 너비를 100%로 설정 */
     box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
+    overflow-y: auto; /* 세로 스크롤 가능하도록 설정 */
 }
 
 /* 모바일 최적화 */
 @media (max-width: 768px) {
     .message-list {
-        height: 420px; /* 높이를 420px로 설정 */
+        height: 410px; /* 높이를 420px로 설정 */
+        max-height: 425px;
         padding: 10px; /* 모바일에서 패딩을 좀 더 줄여서 화면에 맞게 조정 */
     }
 }
