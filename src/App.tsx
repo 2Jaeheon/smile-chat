@@ -11,6 +11,7 @@ interface Message {
     messageId: string;
     content: string;
     timestamp: string;
+    sentiment: string;
 }
 
 const App: React.FC = () => {
@@ -69,7 +70,6 @@ const App: React.FC = () => {
                     // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
                     const updatedMessages = await getMessages();
                     setMessages(updatedMessages);  // 메시지 갱신
-                    setNewMessage("");  // 메시지 전송 후 입력창 비우기
                 } else {
                     console.error('Error adding message:', await response.text());
                 }
