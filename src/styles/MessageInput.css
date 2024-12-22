@@ -8,6 +8,7 @@
     max-width: 780px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
     padding: 10px;
     display: flex;
+    flex-direction: column; /* 입력창과 파일 선택 부분이 세로로 배치되도록 설정 */
     justify-content: center;
     z-index: 10; /* 다른 요소들 위에 위치하도록 설정 */
 }
