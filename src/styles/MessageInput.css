@@ -50,3 +50,9 @@
 .message-input button:hover {
     background-color: #45a049;
 }
+
+.warning-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
