@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
 import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌트 추가
-import {getMessages, uploadImage} from "./api/api"; // addMessage를 여기서 호출하지 않음
+import {getMessages, uploadImage} from "./api/api"; // uploadImage 함수 추가
 import LoadingSpinner from "./components/LoadingSpinner"; // 로딩 스피너 추가
 import "./styles/WelcomePage.css"; // WelcomePage 스타일 추가
 import "./styles/AuthenticatedPage.css";
@@ -110,7 +110,7 @@ const App: React.FC = () => {
                             newMessage={newMessage}
                             setNewMessage={setNewMessage}
                             handleSendMessage={handleSendMessage}
-                            uploadImage={uploadImage}  // 사진 업로드 함수 전달
+                            uploadImage={uploadImage}  // uploadImage 함수를 MessageInput에 전달
                         />
                     </div>
                 </div>
