@@ -5,6 +5,7 @@ import MessageInput from "./components/MessageInput"; // MessageInput 컴포넌�
 import {getMessages} from "./api/api"; // addMessage를 여기서 호출하지 않음
 import LoadingSpinner from "./components/LoadingSpinner"; // 로딩 스피너 추가
 import "./styles/WelcomePage.css"; // WelcomePage 스타일 추가
+import "./styles/AuthenticatedPage.css";
 
 interface Message {
     messageId: string;
@@ -98,7 +99,8 @@ const App: React.FC = () => {
                         </p>
                         <button className="signout-button" onClick={() => signOutRedirect()}>
                             Sign Out
-                        </button>gi
+                        </button>
+                        gi
                     </div>
                     <div className="chat-section">
                         <h2>Real-time Chat</h2>
