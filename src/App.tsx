@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useAuth} from "react-oidc-context";
 import MessageList from "./components/MessageList";
-import {getMessages} from "./api/api";
+import {getMessages, addMessage} from "./api/api";  // addMessage 함수 추가
 
 interface Message {
     messageId: string;
@@ -39,15 +39,28 @@ const App: React.FC = () => {
 
     // 메시지 전송 함수
     const handleSendMessage = async () => {
+        const emailPrefix = auth.user?.profile.email?.split('@')[0];  // 이메일에서 @ 앞부분만 추출
+
         if (newMessage.trim() !== "") {
             const newMsg = {
-                messageId: `${Date.now()}`,
+                messageId: emailPrefix || `${Date.now()}`,  // 이메일이 없을 경우 타임스탬프 사용
                 content: newMessage,
-                timestamp: new Date().toISOString(),
+                timestamp: Math.floor(Date.now() / 1000), // 초 단위 유닉스 타임스탬프
+                sentiment: "", // 예시 sentiment
+                roomId: "room1", // 예시 roomId
+                userId: auth.user?.profile.email || "unknown", // 사용자 ID를 이메일로 사용
             };
 
-            setMessages((prevMessages) => [...prevMessages, newMsg]);
-            setNewMessage("");
+            try {
+                await addMessage(newMsg);  // addMessage 함수 호출하여 메시지 추가
+                setNewMessage("");  // 메시지 전송 후 입력창 비우기
+
+                // 메시지 전송 후 최신 메시지 목록을 다시 가져오기
+                const updatedMessages = await getMessages();
+                setMessages(updatedMessages);  // 메시지 갱신
+            } catch (error) {
+                console.error("Error adding message:", error);
+            }
         }
     };
 
