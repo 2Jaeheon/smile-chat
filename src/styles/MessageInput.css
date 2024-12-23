@@ -81,7 +81,6 @@
     background-color: #3498db;
     color: white;
     padding: 3px 6px;
-    margin-top: 5px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
@@ -98,7 +97,9 @@
 #fileName {
     font-size: 14px;
     color: #333;
+    margin-top: 5px;
     margin-left: 15px;
+    magin-bottom: 0px;
 }
 
 
@@ -106,6 +107,10 @@
 @media (max-width: 768px) {
     .message-input {
         width: 80%;
+    }
+
+    .file-input-container label {
+        margin-top: 5px;
     }
 
     .file-input-container {
