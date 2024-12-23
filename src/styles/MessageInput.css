@@ -69,7 +69,7 @@
 /* 파일 선택 및 파일 이름 표시 부분 */
 .file-input-container {
     display: flex;
-    flex-direction: column; /* 세로로 배치 */
+    /*flex-direction: column; !* 세로로 배치 *!*/
     align-items: flex-start; /* 왼쪽 정렬 */
     width: 100%;
 }
@@ -83,7 +83,6 @@
 
 /* 파일 이름 또는 선택되지 않았을 때 표시할 문구 스타일 */
 .file-input-container fileName {
-    margin-top: 5px;
     font-size: 12px;
     color: #6c757d;
 }
