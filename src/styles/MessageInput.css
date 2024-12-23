@@ -81,10 +81,10 @@
     background-color: #3498db;
     color: white;
     padding: 3px 6px;
+    margin-top: 5px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 15px;
-    margin-bottom: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
