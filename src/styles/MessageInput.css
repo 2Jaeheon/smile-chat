@@ -79,11 +79,11 @@
 .file-input-container label {
     background-color: #3498db;
     color: white;
-    padding: 10px 20px;
+    padding: 3px 6px;
     border-radius: 8px;
     cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 15px;
+    margin-bottom: 5px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
