@@ -97,8 +97,7 @@
 #fileName {
     font-size: 14px;
     color: #333;
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 
@@ -127,7 +126,7 @@
     }
 
     .file-input-container label {
-        font-size: 14px;
+        font-size: 10px;
     }
 
     .warning-message {
@@ -161,7 +160,7 @@
     }
 
     .file-input-container label {
-        font-size: 12px;
+        font-size: 10px;
     }
 
     .warning-message {
