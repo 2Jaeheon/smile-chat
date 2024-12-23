@@ -106,9 +106,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
                 {/* 선택된 파일 이름 또는 선택되지 않은 경우 안내 메시지 표시 */}
                 {imageFile ? (
-                    <p>{imageFile.name}</p>  // 선택된 파일 이름 표시
+                    <p id="fileName">{imageFile.name}</p>  // 선택된 파일 이름 표시
                 ) : (
-                    <p>No file selected</p>  // 파일이 선택되지 않았으면 안내 문구 표시
+                    <p id="fileName">No file selected</p>  // 파일이 선택되지 않았으면 안내 문구 표시
                 )}
             </div>
         </div>

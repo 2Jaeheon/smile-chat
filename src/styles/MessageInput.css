@@ -6,7 +6,7 @@
     transform: translateX(-50%); /* 가로 중앙 정렬 */
     width: 100%;
     max-width: 780px; /* 최대 너비를 설정하여 너무 넓지 않도록 */
-    padding: 8px;
+    /*padding: 8px;*/
     display: flex;
     flex-direction: column; /* 입력창과 파일 선택 부분이 세로로 배치되도록 설정 */
     justify-content: center;
@@ -82,7 +82,7 @@
 }
 
 /* 파일 이름 또는 선택되지 않았을 때 표시할 문구 스타일 */
-.file-input-container p {
+.file-input-container fileName {
     margin-top: 5px;
     font-size: 12px;
     color: #6c757d;
