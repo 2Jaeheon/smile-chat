@@ -6,6 +6,9 @@
 서버 인프라를 관리하지 않고, 이벤트 기반의 서버리스 아키텍처를 활용하여 채팅 웹 애플리케이션을 구현하는 것이 목적입니다. <br>
 기존 수업에서 사용한 EC2, RDS, S3, EIP, ELB, EBS, EFS를 사용하지 않고, 다른 서비스들을 사용하여 서비스를 구축하는 것을 목표로 합니다.
 
+## 시연 영상
+![img.png](resources/vedio.gif)
+
 ## 구조
 다음은 프로젝트의 전체적인 구조를 나타냅니다.
 <br>
@@ -111,8 +114,6 @@ Amplify에 프로젝트를 올릴 때, Stack [CDKToolkit] already exists 에러�
 <br>
 <br>
 <br>
-## 시연 영상
-![img.png](resources/vedio.gif)
 
 ## 참고
 - [AWS Amplify](https://aws.amazon.com/ko/amplify/)
